@@ -9,15 +9,18 @@ class App extends Component {
     this.state = {
       error: null,
       isLoaded: false,
-      items: []
+      items: [],
+      elements: []
+
     };
   }
+
   componentDidMount() {
-    $.get("https://localhost:5001/api/Articles/13323")
+    $.get("https://localhost:5001/api/Articles/")
       //.then(res => res.statusText())
       .then(
         (result) => {
-          debugger
+
           this.setState({
             isLoaded: true,
             items: result
@@ -35,17 +38,21 @@ class App extends Component {
       )
   }
   render() {
-    const { error, isLoaded, items } = this.state;
+    const { error, isLoaded, items, elements } = this.state;
     if (error) {
       return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
       return <div>Loading...</div>;
     } else {
-      return (
-        <div className="article-list row">
-          <Article Titulo="Teste" img={items.imageUrl} Descricao=""></Article>
-        </div>
-      );
+      for (let index = 0; index < items.length; index++) {
+        const element = items[index];
+        elements.push(
+          <Article Titulo="Teste" img={element.imageUrl} Descricao=""></Article>
+        )
+       
+      }
+      return ( <div className="article-list row">  {elements}</div>);
+
     }
   }
 }

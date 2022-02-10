@@ -8,7 +8,7 @@ constructor(props){
     render(){
         
         return(
-            <div className="card">
+            <div className="m-1 col-4 card">
                     <img src={this.props.img} className="card-img-top" alt="..."></img>
                     <div className="card-body">
                         <h5 className="card-title">{this.props.Titulo}</h5>
