@@ -25,11 +25,14 @@ namespace challengeCoodesh.DbConfig.Repository
             return collection.Find(ar => ar.id == id).FirstOrDefault();
         }
 
-        public IEnumerable<Articles> Buscar(int? _init, int? _finish)
+        public IEnumerable<Articles> Buscar(string title, int? _init, int? _finish)
         {
             var database = db.database;
             var collection = database.GetCollection<Articles>("Data");
-            var data = collection.Find(ar => true).Skip(_init).Limit(_finish).ToList().OrderBy(ar=>ar.id);
+            var data = collection.Find(ar => true).Skip(_init).Limit(_finish).ToList().OrderBy(ar=>ar.id).AsEnumerable();
+            if(!String.IsNullOrEmpty(title))
+                data = data.Where(article=> article.title.Contains(title));
+            
             return data;
         }
             

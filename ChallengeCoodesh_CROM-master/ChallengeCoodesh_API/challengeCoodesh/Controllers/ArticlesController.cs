@@ -23,10 +23,10 @@ namespace challengeCoodesh.Controllers
 
         // GET: api/Articles
         [HttpGet]
-        public IActionResult Get(int? _init=0, int? _limit=10)
+        public IActionResult Get(string title, int? _init=0, int? _limit=10)
         {
 
-            return new OkObjectResult(articlesRepository.Buscar(_init, _limit)); 
+            return new OkObjectResult(articlesRepository.Buscar(title,_init, _limit)); 
         }
 
         // GET api/Articles/5

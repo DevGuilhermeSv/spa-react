@@ -1,8 +1,14 @@
 import logo from './logo.svg';
 import './App.css';
-import Article from './components/Article';
+import Article from './components/Article/Article';
 import React, { Component } from 'react';
 import $ from 'jquery';
+
+export function setAPP(search,mount) {
+  
+  a.getArticles(search,mount)
+}
+var a;
 class App extends Component {
   constructor(props) {
     super(props);
@@ -10,14 +16,26 @@ class App extends Component {
       error: null,
       isLoaded: false,
       items: [],
-      elements: []
+      search: ""
+
 
     };
+    //setAPP =setAPP.bind(this);
+    a = this;
   }
 
   componentDidMount() {
-    $.get("https://localhost:5001/api/Articles/")
-      //.then(res => res.statusText())
+    this.getArticles("");
+  }
+  getArticles(title,mount) {
+    debugger
+    $.ajax({
+      url: "https://localhost:5001/api/Articles",
+      data: {
+        title: title,
+        _limit : mount
+      }
+    })
       .then(
         (result) => {
 
@@ -38,20 +56,22 @@ class App extends Component {
       )
   }
   render() {
-    const { error, isLoaded, items, elements } = this.state;
+    
+    const { error, isLoaded, items } = this.state;
     if (error) {
       return <div>Error: {error.message}</div>;
     } else if (!isLoaded) {
       return <div>Loading...</div>;
     } else {
+      var elements=[];
       for (let index = 0; index < items.length; index++) {
         const element = items[index];
         elements.push(
-          <Article Titulo="Teste" img={element.imageUrl} Descricao=""></Article>
+          <Article noticia={element.url} Titulo={element.title} img={element.imageUrl} ></Article>
         )
-       
+
       }
-      return ( <div className="article-list row">  {elements}</div>);
+      return (<div className="article-list row">  {elements}</div>);
 
     }
   }
