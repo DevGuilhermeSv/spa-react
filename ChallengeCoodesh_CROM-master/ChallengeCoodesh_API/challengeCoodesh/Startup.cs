@@ -14,8 +14,8 @@ namespace challengeCoodesh
 {
     public class Startup
     {
-        
-        string  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+        string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -31,7 +31,9 @@ namespace challengeCoodesh
                 options.AddPolicy(name: MyAllowSpecificOrigins,
                                 builder =>
                                 {
-                                    builder.WithOrigins("http://localhost:3000");
+                                    builder.AllowAnyOrigin()
+                                        .AllowAnyHeader()
+                                        .AllowAnyMethod();
                                 });
             });
             services.AddHttpsRedirection(options =>
