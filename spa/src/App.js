@@ -71,7 +71,7 @@ class App extends Component {
         )
 
       }
-      return (<div className="article-list row">  {elements}</div>);
+      return (<div className="article-list row justify-content-center">  {elements}</div>);
 
     }
   }

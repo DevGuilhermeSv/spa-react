@@ -21,9 +21,9 @@ export default class SearchBar extends Component {
 
     render() {
         return (
-            <div className="d-flex form-area">
-                
-                    <input id='search-bar' type={"text"} />
+            <div className="d-flex justify-content-center form-area">
+               
+                <input id='search-bar' type={"text"} />
                 
                 
                 <select  onChange={this.renderAPP} class="form-select" aria-label="amount itens">
@@ -33,10 +33,11 @@ export default class SearchBar extends Component {
                 </select>
                 <button onClick={this.renderAPP} id="buscar-btn" className="btn btn-primary">Buscar</button>
                 
+              
+                    
                 
             </div>
         )
     }
 }
-
 
